@@ -10,7 +10,7 @@ Certifique-se de ter o Node.js instalado em seu sistema. Você pode baixá-lo [a
 
 1. Clone o repositório
 
-npm install
+npm install --> node version = v18.16.0
 
 node index.js
 
