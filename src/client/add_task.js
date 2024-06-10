@@ -5,7 +5,7 @@ const newTask = {
   content: 'Conteudo da tarefa',
   dueDate: '2024-06-25',
   completionDate: '',
-  priority: 'Alta',
+  priority: 'Baixa',
   status: 'Pendente',
 };
 

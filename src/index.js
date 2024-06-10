@@ -13,7 +13,7 @@ const tasks = [
     content: 'Conteúdo 1',
     dueDate: '2024-06-15',
     completionDate: '',
-    priority: 'Alta',
+    priority: 'Média',
     status: 'Pendente',
   },
   {
@@ -22,7 +22,7 @@ const tasks = [
     content: 'Conteúdo 2',
     dueDate: '2024-06-20',
     completionDate: '',
-    priority: 'Média',
+    priority: 'Alta',
     status: 'Pendente',
   },
 ];
@@ -31,12 +31,30 @@ let taskIdCounter = tasks.length
   ? Math.max(...tasks.map((task) => parseInt(task.id)))
   : 0;
 
+// Helper function to map priority to a numeric value
+const getPriorityValue = (priority) => {
+  switch (priority) {
+    case 'Alta':
+      return 1;
+    case 'Média':
+      return 2;
+    case 'Baixa':
+      return 3;
+    default:
+      return 4;
+  }
+};
+
 // Define the service methods
 const server = new grpc.Server();
 
 server.addService(tasksProto.TaskService.service, {
   list: (_, callback) => {
-    callback(null, { tasks: tasks });
+    // Sort tasks by priority
+    const sortedTasks = tasks.sort(
+      (a, b) => getPriorityValue(a.priority) - getPriorityValue(b.priority)
+    );
+    callback(null, { tasks: sortedTasks });
   },
 
   add: (call, callback) => {
