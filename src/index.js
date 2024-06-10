@@ -6,11 +6,30 @@ const tasksProto = grpc.loadPackageDefinition(
   protoLoader.loadSync('./tasks.proto')
 );
 
-//adiciojar atributo data de finalização
 const tasks = [
-  { id: '1', title: 'Tarefa 1', content: 'Conteudo 1' },
-  { id: '2', title: 'Tarefa 2', content: 'Conteudo 2' },
+  {
+    id: '1',
+    title: 'Tarefa 1',
+    content: 'Conteúdo 1',
+    dueDate: '2024-06-15',
+    completionDate: '',
+    priority: 'Alta',
+    status: 'Pendente',
+  },
+  {
+    id: '2',
+    title: 'Tarefa 2',
+    content: 'Conteúdo 2',
+    dueDate: '2024-06-20',
+    completionDate: '',
+    priority: 'Média',
+    status: 'Pendente',
+  },
 ];
+
+let taskIdCounter = tasks.length
+  ? Math.max(...tasks.map((task) => parseInt(task.id)))
+  : 0;
 
 // Define the service methods
 const server = new grpc.Server();
@@ -22,6 +41,7 @@ server.addService(tasksProto.TaskService.service, {
 
   add: (call, callback) => {
     const task = call.request;
+    task.id = (++taskIdCounter).toString();
     tasks.push(task);
     callback(null, task);
   },

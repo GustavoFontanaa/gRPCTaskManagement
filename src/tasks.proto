@@ -18,6 +18,10 @@ message Task {
     string id = 1;
     string title = 2;
     string content = 3;
+    string dueDate = 4;
+    string completionDate = 5;
+    string priority = 6;
+    string status = 7;
 }
 
 message TaskList {

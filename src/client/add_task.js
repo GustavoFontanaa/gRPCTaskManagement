@@ -1,9 +1,12 @@
 const client = require('./client-grpc');
 
 const newTask = {
-  id: '3',
   title: 'Nova Tarefa',
-  content: 'novo content',
+  content: 'Conteudo da tarefa',
+  dueDate: '2024-06-25',
+  completionDate: '',
+  priority: 'Alta',
+  status: 'Pendente',
 };
 
 client.add(newTask, (error, addedTask) => {

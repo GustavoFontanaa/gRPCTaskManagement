@@ -4,6 +4,10 @@ const updatedTask = {
   id: '1',
   title: 'Tarefa Atualizada',
   content: 'Conteúdo da tarefa atualizada',
+  dueDate: '2024-06-15',
+  completionDate: '2024-06-13',
+  priority: 'Baixa',
+  status: 'Concluída',
 };
 
 client.update(updatedTask, (error, updatedTask) => {
